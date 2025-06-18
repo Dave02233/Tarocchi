@@ -38,14 +38,14 @@ function App() {
       {showCards
       ? <>
           <div>
-            <img src={'/Tarocchi/Cards-jpg/' + pickedCards[0] + '.jpg'} alt="First Card" />
-            <img src={'/Tarocchi/Cards-jpg/' + pickedCards[1] + '.jpg'} alt="Second Card" />
-            <img src={'/Tarocchi/Cards-jpg/' + pickedCards[2] + '.jpg'} alt="Third Card" />
+            <img src={'/Tarocchi/Cards-jpg/' + pickedCards[0][0] + '.jpg'} alt="First Card" />
+            <img src={'/Tarocchi/Cards-jpg/' + pickedCards[1][0] + '.jpg'} alt="Second Card" />
+            <img src={'/Tarocchi/Cards-jpg/' + pickedCards[2][0] + '.jpg'} alt="Third Card" />
           </div>
           <ol>
-            <li>{pickedCards[0]}</li>
-            <li>{pickedCards[1]}</li>
-            <li>{pickedCards[2]}</li>
+            <li>{`${pickedCards[0][0]}, ${pickedCards[0][1]}`}</li>
+            <li>{`${pickedCards[1][0]}, ${pickedCards[1][1]}`}</li>
+            <li>{`${pickedCards[2][0]}, ${pickedCards[2][1]}`}</li>
           </ol>
         </>
       : <p>Poni una domanda e mostra le tue carte</p>
