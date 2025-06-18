@@ -27,7 +27,6 @@ function App() {
     return cardImageNames[randomIndex];
   }
 
-    
   pickedCards = [randomCard(), randomCard(), randomCard()];
 
   return (
@@ -39,9 +38,9 @@ function App() {
       {showCards
       ? <>
           <div>
-            <img src={'./src/Cards-jpg/Cards-jpg/' + pickedCards[0] + '.jpg'} alt="First Card" />
-            <img src={'./src/Cards-jpg/Cards-jpg/' + pickedCards[1] + '.jpg'} alt="Second Card" />
-            <img src={'./src/Cards-jpg/Cards-jpg/' + pickedCards[2] + '.jpg'} alt="Third Card" />
+            <img src={'/Tarocchi/Cards-jpg/' + pickedCards[0] + '.jpg'} alt="First Card" />
+            <img src={'/Tarocchi/Cards-jpg/' + pickedCards[1] + '.jpg'} alt="Second Card" />
+            <img src={'/Tarocchi/Cards-jpg/' + pickedCards[2] + '.jpg'} alt="Third Card" />
           </div>
           <ol>
             <li>{pickedCards[0]}</li>
@@ -51,8 +50,6 @@ function App() {
         </>
       : <p>Poni una domanda e mostra le tue carte</p>
       }
-
-
     </>
   )
 }
