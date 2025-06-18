@@ -80,8 +80,9 @@ button {
     padding-left: 1.2em;
   }
   img {
-    max-width: 95vw;
+    display: block;
+    margin: 0.5rem auto;
+    max-width: 70vw;
     height: auto;
-    margin-bottom: 0.5rem;
   }
 }
