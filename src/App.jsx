@@ -31,7 +31,7 @@ const handleClick = async () => {
   setShowCards(!showCards);
   setQuestion(inputValue);
 
-  if (showCards && question) {
+  if (!showCards && question) {
     setAnswer(await questionAPI(`Fammi una predizione dei tarocchi. La domanda è: "${question}", e le carte uscite sono: ${pickedCards.toString()}.
 Rispondi in modo semplice, chiaro e sintetico.
 Usa una struttura con:
