@@ -99,8 +99,13 @@ Formatta la risposta per essere plain text, assolutamente non markdown.`
       {
         showCards ? 
         <>
-          <h1>Ecco la risposta dell'oracolo</h1>
-          <p>{answer ? answer : null}</p>
+          {answer ? 
+            <>
+              <h1>Ecco la risposta dell'oracolo</h1>
+              <p>{answer ? answer : null}</p>
+            </>
+          : <h1>L'oracolo sta elaborando la risposta...</h1>
+          }
         </> :
         'Funzione non in funzione'
 
