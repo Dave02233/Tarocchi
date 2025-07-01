@@ -1,18 +1,27 @@
 import React, { useState } from "react";
 import { cardImageNames } from "./Cards";
+import { questionAPI } from "./Gemini/GeminiAPI"
 
 function App() {
   const [showCards, setShowCards] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [question, setQuestion] = useState('');
+  const [answer, setAnswer] = useState('');
+
   let pickedCards = [];
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
   }
 
-  const handleClick = () => {
+  const handleClick = async () => {
     setShowCards(!showCards);
     showCards ? setInputValue('') : null;
+
+    if(showCards) {
+      setQuestion(inputValue);
+      setAnswer(await questionAPI(`Fammi una predizione dei tarocchi, la domanda era ${question}, mentre le carte uscite sono: ${pickedCards.toString()}`));
+    }
   }
 
   const randomCard = () => {
@@ -49,6 +58,12 @@ function App() {
           </ol>
         </>
       : <p>Poni una domanda e mostra le tue carte</p>
+      }
+
+      {
+        showCards ? 
+        <p>{answer ? answer : null}</p> :
+        'Funzione non in funzione'
       }
     </>
   )
