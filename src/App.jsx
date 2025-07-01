@@ -20,7 +20,15 @@ function App() {
 
     if(showCards) {
       setQuestion(inputValue);
-      setAnswer(await questionAPI(`Fammi una predizione dei tarocchi, la domanda era ${question}, mentre le carte uscite sono: ${pickedCards.toString()}`));
+      setAnswer(await questionAPI(`Fammi una predizione dei tarocchi. La domanda è: "${question}", e le carte uscite sono: ${pickedCards.toString()}.
+Rispondi in modo semplice, chiaro e sintetico.
+Usa una struttura con:
+- Titolo per ogni carta (nome e posizione)
+- 1-2 parole chiave in grassetto per ogni carta
+- Una breve spiegazione (massimo 3-4 frasi) per ogni carta
+- Una conclusione finale di massimo 2 frasi
+
+Formatta la risposta per essere plain text.`));
     }
   }
 
