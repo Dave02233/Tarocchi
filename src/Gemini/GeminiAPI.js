@@ -1,13 +1,10 @@
-import { GoogleGenAI } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.APIKEY });
-
-export default async function questionAPI() {
-  const response = await ai.models.generateContent({
-    model: "gemini-2.5-flash",
-    contents: "Ciao come va?",
+export default async function questionAPI(prompt) {
+  const res = await fetch("http://52.41.36.82:3001/api/gemini", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ prompt }),
   });
-  console.log(response.text);
+  const data = await res.json();
+  return data.text;
 }
-
-
