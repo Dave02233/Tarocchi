@@ -107,7 +107,7 @@ Formatta la risposta per essere plain text, assolutamente non markdown.`
           : <h1>L'oracolo sta elaborando la risposta...</h1>
           }
         </> :
-        'Funzione non in funzione'
+        null
 
       }
     </>
