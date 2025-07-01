@@ -8,20 +8,31 @@ function App() {
   const [question, setQuestion] = useState('');
   const [answer, setAnswer] = useState('');
 
-  let pickedCards = [];
+  const [pickedCards, setPickedCards] = useState([]);
 
   const handleChange = (event) => {
     setInputValue(event.target.value);
   }
 
-  const handleClick = async () => {
-    setShowCards(!showCards);
-    showCards ? setInputValue('') : null;
-    setQuestion(inputValue);
+const handleClick = async () => {
+  if (!showCards) {
+    // Mostra le carte: pesca nuove carte
+    const newCards = [];
+    while (newCards.length < 3) {
+      const randomIndex = Math.floor(Math.random() * cardImageNames.length);
+      if (!newCards.includes(randomIndex)) {
+        newCards.push(randomIndex);
+      }
+    }
+    setPickedCards(newCards.map(i => cardImageNames[i]));
+  } else {
+    setInputValue('');
+  }
+  setShowCards(!showCards);
+  setQuestion(inputValue);
 
-    if(showCards && question) {
-
-      setAnswer(await questionAPI(`Fammi una predizione dei tarocchi. La domanda è: "${question}", e le carte uscite sono: ${pickedCards.toString()}.
+  if (showCards && question) {
+    setAnswer(await questionAPI(`Fammi una predizione dei tarocchi. La domanda è: "${question}", e le carte uscite sono: ${pickedCards.toString()}.
 Rispondi in modo semplice, chiaro e sintetico.
 Usa una struttura con:
 - Titolo per ogni carta (nome e posizione)
@@ -31,7 +42,10 @@ Usa una struttura con:
 
 Formatta la risposta per essere plain text, assolutamente non markdown.`));
     }
-  }
+};
+
+
+
 
   const randomCard = () => {
     const randomIndex = Math.floor(Math.random() * cardImageNames.length)
@@ -45,7 +59,6 @@ Formatta la risposta per essere plain text, assolutamente non markdown.`));
     return cardImageNames[randomIndex];
   }
 
-  pickedCards = [randomCard(), randomCard(), randomCard()];
 
   return (
     <>
