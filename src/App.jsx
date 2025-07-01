@@ -48,7 +48,7 @@ Usa una struttura con:
 - Una breve spiegazione (massimo 3-4 frasi) per ogni carta
 - Una conclusione finale di massimo 2 frasi
 
-Formatta la risposta per essere plain text, assolutamente non markdown.`
+Formatta la risposta per essere plain text, assolutamente non markdown, rispondi sempre in italiano e separa in sezioni il significiato di ogni carta, finisci sempre con le conclusioni finali.`
     ));
   } else {
     setShowCards(false);
