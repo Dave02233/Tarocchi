@@ -25,7 +25,7 @@ function App() {
 
   const handleClick = async () => {
   if (!showCards) {
-    // Mostra le carte: pesca nuove carte
+
     const newCardsIndexes = [];
     while (newCardsIndexes.length < 3) {
       const randomIndex = Math.floor(Math.random() * cardImageNames.length);
@@ -38,18 +38,7 @@ function App() {
     setShowCards(true);
     setQuestion(inputValue);
 
-    // Chiedi la predizione subito dopo aver pescato le carte
-    setAnswer(await questionAPI(
-      `Fammi una predizione dei tarocchi. La domanda è: "${inputValue}", e le carte uscite sono: ${newCards.toString()}.
-Rispondi in modo semplice, chiaro e sintetico.
-Usa una struttura con:
-- Titolo per ogni carta (nome e posizione)
-- 1-2 parole chiave in grassetto per ogni carta
-- Una breve spiegazione (massimo 3-4 frasi) per ogni carta
-- Una conclusione finale di massimo 2 frasi
-
-Formatta la risposta per essere plain text, assolutamente non markdown, rispondi sempre in italiano e separa in sezioni il significiato di ogni carta, finisci sempre con le conclusioni finali.`
-    ));
+    setAnswer(await questionAPI(inputValue, newCards));
   } else {
     setShowCards(false);
     setInputValue('');
