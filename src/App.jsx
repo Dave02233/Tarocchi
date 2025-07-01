@@ -14,25 +14,25 @@ function App() {
     setInputValue(event.target.value);
   }
 
-const handleClick = async () => {
+
+  const handleClick = async () => {
   if (!showCards) {
     // Mostra le carte: pesca nuove carte
-    const newCards = [];
-    while (newCards.length < 3) {
+    const newCardsIndexes = [];
+    while (newCardsIndexes.length < 3) {
       const randomIndex = Math.floor(Math.random() * cardImageNames.length);
-      if (!newCards.includes(randomIndex)) {
-        newCards.push(randomIndex);
+      if (!newCardsIndexes.includes(randomIndex)) {
+        newCardsIndexes.push(randomIndex);
       }
     }
-    setPickedCards(newCards.map(i => cardImageNames[i]));
-  } else {
-    setInputValue('');
-  }
-  setShowCards(!showCards);
-  setQuestion(inputValue);
+    const newCards = newCardsIndexes.map(i => cardImageNames[i]);
+    setPickedCards(newCards);
+    setShowCards(true);
+    setQuestion(inputValue);
 
-  if (!showCards && question) {
-    setAnswer(await questionAPI(`Fammi una predizione dei tarocchi. La domanda è: "${question}", e le carte uscite sono: ${pickedCards.toString()}.
+    // Chiedi la predizione subito dopo aver pescato le carte
+    setAnswer(await questionAPI(
+      `Fammi una predizione dei tarocchi. La domanda è: "${inputValue}", e le carte uscite sono: ${newCards.toString()}.
 Rispondi in modo semplice, chiaro e sintetico.
 Usa una struttura con:
 - Titolo per ogni carta (nome e posizione)
@@ -40,10 +40,16 @@ Usa una struttura con:
 - Una breve spiegazione (massimo 3-4 frasi) per ogni carta
 - Una conclusione finale di massimo 2 frasi
 
-Formatta la risposta per essere plain text, assolutamente non markdown.`));
-    }
+Formatta la risposta per essere plain text, assolutamente non markdown.`
+    ));
+  } else {
+    setShowCards(false);
+    setInputValue('');
+    setPickedCards([]);
+    setQuestion('');
+    setAnswer('');
+  }
 };
-
 
 
 
