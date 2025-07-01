@@ -17,9 +17,10 @@ function App() {
   const handleClick = async () => {
     setShowCards(!showCards);
     showCards ? setInputValue('') : null;
+    setQuestion(inputValue);
 
-    if(showCards) {
-      setQuestion(inputValue);
+    if(showCards && question) {
+
       setAnswer(await questionAPI(`Fammi una predizione dei tarocchi. La domanda è: "${question}", e le carte uscite sono: ${pickedCards.toString()}.
 Rispondi in modo semplice, chiaro e sintetico.
 Usa una struttura con:
@@ -70,8 +71,12 @@ Formatta la risposta per essere plain text.`));
 
       {
         showCards ? 
-        <p>{answer ? answer : null}</p> :
+        <>
+          <h1>Ecco la risposta dell'oracolo</h1>
+          <p>{answer ? answer : null}</p>
+        </> :
         'Funzione non in funzione'
+
       }
     </>
   )
