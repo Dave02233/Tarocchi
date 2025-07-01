@@ -14,6 +14,14 @@ function App() {
     setInputValue(event.target.value);
   }
 
+  const handleDestroyEverything = () => {
+    setShowCards(false);
+    setInputValue('');
+    setPickedCards([]);
+    setQuestion('');
+    setAnswer('');
+  }
+
 
   const handleClick = async () => {
   if (!showCards) {
@@ -69,7 +77,7 @@ Formatta la risposta per essere plain text, assolutamente non markdown.`
   return (
     <>
       <h1>Tarocchi</h1>
-      <input type="text" value={inputValue} onChange={handleChange} placeholder="Come andrà la mia vita?"/>
+      <input onClick={handleDestroyEverything} type="text" value={inputValue} onChange={handleChange} placeholder="Come andrà la mia vita?"/>
       <button onClick={handleClick} disabled={!inputValue}>{!showCards ? 'Mostra le carte' : 'Nascondi le carte'}</button>
 
       {showCards
