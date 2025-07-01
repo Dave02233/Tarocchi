@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { cardImageNames } from "./Cards";
-import { questionAPI } from "./Gemini/GeminiAPI"
+import questionAPI from "./Gemini/GeminiAPI"
 
 function App() {
   const [showCards, setShowCards] = useState(false);
