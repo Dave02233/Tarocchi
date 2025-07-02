@@ -91,7 +91,7 @@ function App() {
           {answer ? 
             <>
               <h1>Ecco la risposta dell'oracolo</h1>
-              <p>{answer ? answer : null}</p>
+              {answer ? answer : null}
             </>
           : <h1>L'oracolo sta elaborando la risposta...</h1>
           }
