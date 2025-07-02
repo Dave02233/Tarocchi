@@ -91,7 +91,7 @@ function App() {
           {answer ? 
             <>
               <h1>Ecco la risposta dell'oracolo</h1>
-              {answer ? answer : null}
+              {answer ? <div dangerouslySetInnerHTML={{ __html: answer }} /> : null}
             </>
           : <h1>L'oracolo sta elaborando la risposta...</h1>
           }
