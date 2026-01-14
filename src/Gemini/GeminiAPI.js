@@ -1,5 +1,5 @@
 export default async function questionAPI(inputValue, newCards) {
-  const res = await fetch("https://expresstest-70ap.onrender.com/api/gemini", {
+  const res = await fetch("https://expresstest-gkdq.onrender.com/api/gemini", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ inputValue, newCards }),

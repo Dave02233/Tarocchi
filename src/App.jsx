@@ -22,52 +22,56 @@ function App() {
     setAnswer('');
   }
 
-
   const handleClick = async () => {
-  if (!showCards) {
+    if (!showCards) {
+      try {
+        const newCardsIndexes = [];
+        while (newCardsIndexes.length < 3) {
+          const randomIndex = Math.floor(Math.random() * cardImageNames.length);
+          if (!newCardsIndexes.includes(randomIndex)) {
+            newCardsIndexes.push(randomIndex);
+          }
+        }
+        const newCards = newCardsIndexes.map(i => cardImageNames[i]);
+        setPickedCards(newCards);
+        setShowCards(true);
+        setQuestion(inputValue);
 
-    const newCardsIndexes = [];
-    while (newCardsIndexes.length < 3) {
-      const randomIndex = Math.floor(Math.random() * cardImageNames.length);
-      if (!newCardsIndexes.includes(randomIndex)) {
-        newCardsIndexes.push(randomIndex);
+        const response = await questionAPI(inputValue, newCards);
+        setAnswer(response);
+      } catch (error) {
+        console.error('Errore nella lettura dell\'oracolo:', error);
+        setAnswer('Scusa, l\'oracolo non riesce a rispondere in questo momento.');
       }
+    } else {
+      setShowCards(false);
+      setInputValue('');
+      setPickedCards([]);
+      setQuestion('');
+      setAnswer('');
     }
-    const newCards = newCardsIndexes.map(i => cardImageNames[i]);
-    setPickedCards(newCards);
-    setShowCards(true);
-    setQuestion(inputValue);
+  };
 
-    setAnswer(await questionAPI(inputValue, newCards));
-  } else {
-    setShowCards(false);
-    setInputValue('');
-    setPickedCards([]);
-    setQuestion('');
-    setAnswer('');
-  }
-};
-
-
-
-  const randomCard = () => {
-    const randomIndex = Math.floor(Math.random() * cardImageNames.length)
-
-    if(pickedCards.includes(randomIndex)) {
-      return randomCard();
-    }
-
-    pickedCards.push(randomIndex);
-    console.log(pickedCards);
-    return cardImageNames[randomIndex];
-  }
 
 
   return (
     <>
       <h1>Tarocchi</h1>
-      <input onClick={handleDestroyEverything} type="text" value={inputValue} onChange={handleChange} placeholder="Come andrà la mia vita?"/>
-      <button onClick={handleClick} disabled={!inputValue}>{!showCards ? 'Mostra le carte' : 'Nascondi le carte'}</button>
+      <input 
+        onClick={handleDestroyEverything} 
+        type="text" 
+        value={inputValue} 
+        onChange={handleChange} 
+        placeholder="Come andrà la mia vita?"
+        aria-label="Inserisci la tua domanda per l'oracolo"
+      />
+      <button 
+        onClick={handleClick} 
+        disabled={!inputValue}
+        aria-label={!showCards ? 'Mostra le carte dei tarocchi' : 'Nascondi le carte dei tarocchi'}
+      >
+        {!showCards ? 'Mostra le carte' : 'Nascondi le carte'}
+      </button>
 
       {showCards
       ? <>
@@ -91,13 +95,12 @@ function App() {
           {answer ? 
             <>
               <h1>Ecco la risposta dell'oracolo</h1>
-              {answer ? <div dangerouslySetInnerHTML={{ __html: answer }} /> : null}
+              <div className="oracle-answer">{answer}</div>
             </>
           : <h1>L'oracolo sta elaborando la risposta...</h1>
           }
         </> :
         null
-
       }
     </>
   )
