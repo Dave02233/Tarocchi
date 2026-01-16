@@ -95,7 +95,7 @@ function App() {
           {answer ? 
             <>
               <h1>Ecco la risposta dell'oracolo</h1>
-              <div className="oracle-answer">{answer}</div>
+              <div className="oracle-answer" dangerouslySetInnerHTML={{__html: answer}}></div>
             </>
           : <h1>L'oracolo sta elaborando la risposta...</h1>
           }

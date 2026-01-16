@@ -4,6 +4,12 @@ export default async function questionAPI(inputValue, newCards) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ inputValue, newCards }),
   });
-  const data = await res.json();
-  return data.text;
+  const responseText = await res.text();
+  //console.log('Response status:', res.status);
+  //console.log('Response text:', responseText);
+  if (!res.ok) {
+    throw new Error(`HTTP error! status: ${res.status}`);
+  }
+  // Since the response is HTML, return it directly
+  return responseText;
 }
