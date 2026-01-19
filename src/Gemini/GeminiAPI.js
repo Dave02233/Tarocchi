@@ -4,7 +4,7 @@ export default async function questionAPI(inputValue, newCards) {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ inputValue, newCards }),
-      signal: AbortSignal.timeout(20000), // Timeout integrato di 10 secondi
+      signal: AbortSignal.timeout(60000), 
     });
     const responseText = await res.text();
     //console.log('Response status:', res.status);
